@@ -1,6 +1,28 @@
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
 }
+html::-webkit-scrollbar {
+  display: none;
+}
+/* html::-webkit-scrollbar {
+  width: 8px;
+}
+html::-webkit-scrollbar-track {
+  background: #120701;
+}
+html::-webkit-scrollbar-thumb {
+  background: #ecd2ad;
+  border-radius: 15px;
+  border: 2px solid #ecd2ad;
+  background-clip: padding-box;
+}
+@supports not selector(::-webkit-scrollbar) {
+  html {
+  scrollbar-width: thin;
+  background: #ecd2ad;
+} }*/
+
 body {
   margin: 0;
   background:
@@ -25,6 +47,12 @@ body:has(#menu-toggle:checked) .nav-links-search-button::before {
 body:has(#menu-toggle:checked) .nav-links-search-button::after {
   background-color: #120701;
 }
+body:has(#menu-toggle:checked) .nav-links-search-button:hover:after {
+  background-color: #841eb4;
+}
+body:has(#menu-toggle:checked) .nav-links-search-button:hover:before {
+  border-color: #841eb4;
+}
 body:has(#menu-toggle:checked) .nav-links-search-button:active:before {
   border-color: #841eb4;
 }
@@ -33,7 +61,6 @@ body:has(#menu-toggle:checked) .nav-links-search-button:active:after {
 }
 body:has(#menu-toggle:checked) .side-menu {
   transform: translateX(0);
-  z-index: 100;
 }
 body:has(#menu-toggle:checked) .menu-overlay {
   opacity: 1;
@@ -49,7 +76,6 @@ a {
   width: 300px;
   height: 100vh;
   box-sizing: border-box;
-  padding: 40px 40px;
   background:
     radial-gradient(
       circle at 40% 60%,
@@ -80,15 +106,15 @@ a {
   font-family: "Raleway", sans-serif;
   font-size: 24px;
   color: #120701;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  align-self: flex-start;
+  transform-origin: left center;
   transition:
     color 0.3s ease,
-    font-size 0.4s ease;
+    transform 0.4s ease;
 }
 .side-menu a:hover {
   color: #841eb4;
-  font-size: 26px;
+  transform: scale(1.1);
 }
 .menu-overlay {
   position: fixed;
@@ -139,7 +165,6 @@ header {
   padding: 30px 50px;
   border-radius: 0px 0px 70px 70px;
   background: #120701;
-  transition: background-color 0.6s ease;
   animation:
     header-leave linear forwards,
     header-return linear forwards;
@@ -151,16 +176,25 @@ header {
 .nav-logo-display {
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+.nav-logo-display a {
+  display: inline-block;
   font-weight: 900;
   color: #841eb4;
+  font-size: 15px;
   font-family: "Baloo 2", sans-serif;
-  gap: 10px;
+  transform-origin: left center;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.nav-logo-display a:hover {
+  transform: scale(1.1);
 }
 .nav-logo-display .nav-logo-img {
   width: 50px;
   height: 50px;
 }
-
 .nav-links {
   margin-right: 70px;
   display: flex;
@@ -171,18 +205,19 @@ header {
 }
 .nav-links a {
   font-family: "Raleway", sans-serif;
+  display: inline-block;
   font-size: 20px;
   color: #ecd2adb7;
   padding: 10px;
   font-weight: 400;
   transition:
     color 0.4s ease,
-    font-size 0.4s ease;
+    transform 0.4s ease;
   cursor: pointer;
 }
 .nav-links a:hover {
   color: #841eb4;
-  font-size: 22px;
+  transform: scale(1.1);
 }
 .nav-links-buttons {
   display: flex;
@@ -248,9 +283,16 @@ header {
     10px 20px;
   transform: rotate(90deg);
   background-image:
+    linear-gradient(#120701, #120701), linear-gradient(#120701, #120701),
+    linear-gradient(#120701, #120701);
+  transition: 0.7s ease;
+}
+.nav-links-buttons .menu-toggle:checked + .nav-links-options-button:hover {
+  background-image:
     linear-gradient(#841eb4, #841eb4), linear-gradient(#841eb4, #841eb4),
     linear-gradient(#841eb4, #841eb4);
-  transition: 0.7s ease;
+  transform: rotate(90deg) scale(1.1);
+  transition: 0.4s ease;
 }
 .nav-links-buttons .nav-links-search-button {
   display: inline-block;
@@ -306,7 +348,6 @@ header {
 }
 .nav-links-buttons .nav-links-search-button:hover {
   transform: scale(1.1);
-  transition: all 0.5s ease;
 }
 .main-sc {
   pointer-events: none;
@@ -518,7 +559,6 @@ header {
   box-sizing: border-box;
   padding: 12px 25px;
   border-radius: 30px;
-  font-family: "Raleway", sans-serif;
   background:
     radial-gradient(
       circle at 10% 100%,
@@ -529,7 +569,9 @@ header {
   outline: none;
   border: 2px solid #120701;
   margin-top: 35px;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.5s ease;
   scroll-margin-top: 150px;
 }
 .page-2-right input:focus {
@@ -632,6 +674,9 @@ header {
   border: none;
   position: relative;
   z-index: 4;
+  transform-origin: 15px 15px;
+  transition: transform 0.4 ease;
+  cursor: pointer;
 }
 .page-2-right .search-button-p2::before {
   content: "";
@@ -643,7 +688,9 @@ header {
   box-sizing: border-box;
   border: 3px solid #120701;
   border-radius: 50%;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.5s ease;
 }
 .page-2-right .search-button-p2::after {
   content: "";
@@ -655,7 +702,9 @@ header {
   background-color: #120701;
   transform: rotate(45deg);
   transform-origin: left center;
-  transition: background-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.5s ease;
 }
 .page-2-right input:focus + .search-button-p2::before {
   border-color: #841eb4;
@@ -665,9 +714,25 @@ header {
   background-color: #841eb4;
   transition: background-color 0.2s ease;
 }
-.page-2-right .search-button-p2:active::after {
-  background-color: #ecd2ad;
+.page-2-right:has(input:hover, .search-button-p2:hover) input {
+  border-color: #841eb4;
+  transform: scale(1.08);
 }
-.page-2-right .search-button-p2:active::before {
-  border-color: #ecd2ad;
+.page-2-right:has(input:hover, .search-button-p2:hover)
+  .search-button-p2::before {
+  border-color: #841eb4;
+  transform: scale(1.2);
+}
+.page-2-right:has(input:hover, .search-button-p2:hover)
+  .search-button-p2::after {
+  background-color: #841eb4;
+  transform: rotate(45deg) scale(1.3);
+}
+.page-2-right:has(.search-button-p2:active) .search-button-p2::after {
+  background-color: #120701;
+  transform: rotate(45deg) scale(1.4);
+}
+.page-2-right:has(.search-button-p2:active) .search-button-p2::before {
+  border-color: #120701;
+  transform: scale(1.3);
 }
