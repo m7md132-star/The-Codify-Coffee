@@ -1,8 +1,6 @@
 html {
   scroll-behavior: smooth;
 }
-
-
 body {
   margin: 0;
   background:
@@ -21,20 +19,133 @@ body {
 
   overflow-x: hidden;
 }
+body:has(#menu-toggle:checked) .nav-links-search-button::before {
+  border-color: #120701;
+}
+body:has(#menu-toggle:checked) .nav-links-search-button::after {
+  background-color: #120701;
+}
+body:has(#menu-toggle:checked) .nav-links-search-button:active:before {
+  border-color: #841eb4;
+}
+body:has(#menu-toggle:checked) .nav-links-search-button:active:after {
+  background-color: #841eb4;
+}
+body:has(#menu-toggle:checked) .side-menu {
+  transform: translateX(0);
+  z-index: 100;
+}
+body:has(#menu-toggle:checked) .menu-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+a {
+  text-decoration: none;
+}
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 40px 40px;
+  background:
+    radial-gradient(
+      circle at 40% 60%,
+      rgba(255, 255, 255, 0.4),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(255, 255, 255, 0.614),
+      transparent 80%
+    ),
+    radial-gradient(
+      circle at 100% 90%,
+      rgba(232, 171, 85, 0.8),
+      transparent 70%
+    ),
+    #ecd2ad;
+  display: flex;
+  flex-direction: column;
+  gap: 75px;
+  padding: 45px 40px 100px;
+  transform: translateX(100%);
+  transition: transform 0.6s ease;
+  z-index: 100;
+}
+.side-menu a {
+  font-family: "Raleway", sans-serif;
+  font-size: 24px;
+  color: #120701;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  transition:
+    color 0.3s ease,
+    font-size 0.4s ease;
+}
+.side-menu a:hover {
+  color: #841eb4;
+  font-size: 26px;
+}
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 99;
+}
 .hero {
   position: relative;
   overflow: hidden;
+  padding-top: 110px;
   padding-bottom: 250px;
   background: #120701;
   border-radius: 0px 0px 70px 70px;
 }
 
+@supports (animation-timeline: scroll()) {
+  @keyframes header-leave {
+    from {
+      top: 0;
+    }
+    to {
+      top: -120px;
+    }
+  }
+  @keyframes header-return {
+    from {
+      top: -120px;
+    }
+    to {
+      top: 0;
+    }
+  }
+}
+
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px 50px;
-  border-radius: 10px 10px 70px 70px;
+  border-radius: 0px 0px 70px 70px;
+  background: #120701;
+  transition: background-color 0.6s ease;
+  animation:
+    header-leave linear forwards,
+    header-return linear forwards;
+  animation-timeline: scroll(root), scroll(root);
+  animation-range:
+    0px 110px,
+    600px 1010px;
 }
 .nav-logo-display {
   display: flex;
@@ -63,11 +174,14 @@ header {
   color: #ecd2adb7;
   padding: 10px;
   font-weight: 400;
+  transition:
+    color 0.4s ease,
+    font-size 0.4s ease;
   cursor: pointer;
 }
 .nav-links a:hover {
   color: #841eb4;
-  font-size: 20px;
+  font-size: 22px;
 }
 .nav-links-buttons {
   display: flex;
@@ -75,6 +189,8 @@ header {
   align-items: flex-end;
   padding: 5px;
   gap: 10px;
+  position: relative;
+  z-index: 101;
 }
 .nav-links-buttons .menu-toggle {
   position: absolute;
@@ -101,7 +217,6 @@ header {
     18px 26px;
   cursor: pointer;
   transition:
-    background-image 1s ease,
     background-size 0.7s ease,
     background-position 0.7s ease,
     transform 0.7s ease;
@@ -115,18 +230,23 @@ header {
     8px 12px,
     8px 19px,
     8px 26px;
+  background-image:
+    linear-gradient(#841eb4, #841eb4), linear-gradient(#841eb4, #841eb4),
+    linear-gradient(#841eb4, #841eb4);
+  transform: scale(1.1);
+  transition: 0.5s ease;
 }
 .nav-links-buttons .menu-toggle:checked + .nav-links-options-button {
   background-size:
-    18px 2px,
-    18px 2px,
-    18px 2px;
+    24px 2px,
+    24px 2px,
+    24px 2px;
   background-position:
     10px 8px,
     10px 14px,
     10px 20px;
   transform: rotate(90deg);
-    background-image:
+  background-image:
     linear-gradient(#841eb4, #841eb4), linear-gradient(#841eb4, #841eb4),
     linear-gradient(#841eb4, #841eb4);
   transition: 0.7s ease;
@@ -138,6 +258,7 @@ header {
   background-color: transparent;
   border: none;
   position: relative;
+  transition: all 0.5s ease;
 }
 .nav-links-buttons .nav-links-search-button::before {
   content: "";
@@ -162,7 +283,6 @@ header {
   transform: rotate(45deg);
   transform-origin: left center;
   transition: background-color 0.2s ease;
-
 }
 .nav-links-buttons .nav-links-search-button:active:after {
   background-color: #841eb4;
@@ -176,6 +296,16 @@ header {
   width: 18px;
   height: 18px;
   transition: border-color 0.2s ease;
+}
+.nav-links-buttons .nav-links-search-button:hover::after {
+  background-color: #841eb4;
+}
+.nav-links-buttons .nav-links-search-button:hover::before {
+  border-color: #841eb4;
+}
+.nav-links-buttons .nav-links-search-button:hover {
+  transform: scale(1.1);
+  transition: all 0.5s ease;
 }
 .main-sc {
   pointer-events: none;
@@ -365,15 +495,14 @@ header {
 .page-2 {
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 20px 50px;
-    margin-top: 10px;
+  padding: 150px 50px 20px;
+  margin-top: 10px;
 }
 .page-2-top {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 20px;
-  margin-bottom: -20px;
 }
 .page-2-right {
   justify-self: end;
@@ -389,11 +518,18 @@ header {
   padding: 12px 25px;
   border-radius: 30px;
   font-family: "Raleway", sans-serif;
-  background: #f6eae3;
+  background:
+    radial-gradient(
+      circle at 10% 100%,
+      rgba(255, 255, 255, 0.6),
+      transparent 90%
+    ),
+    #ecd2ad;
   outline: none;
   border: 2px solid #120701;
   margin-top: 35px;
   transition: border-color 0.2s ease;
+  scroll-margin-top: 150px;
 }
 .page-2-right input:focus {
   border-color: #841eb4;
@@ -413,17 +549,16 @@ header {
   letter-spacing: 1.2px;
 }
 .card-row {
- display: flex;
- gap: 100px;
- overflow-x: auto;
- padding-bottom: 30px;
-
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 30px;
 }
 .card {
   position: relative;
   flex: 0 0 auto;
-  width: 400px;
-  height: 550px;
+  width: 337px;
+  height: 380px;
   box-sizing: border-box;
   padding: 10px;
   border-radius: 25px;
@@ -434,29 +569,41 @@ header {
   justify-content: flex-end;
 }
 .card h3 {
+  color: #120701;
   margin: 15px 0 5px;
   font-family: "DM Serif Display", serif;
   font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 1.5px;
 }
 .card p {
+  color: #120701;
   margin: 0 0 12px;
   font-family: "Raleway", sans-serif;
-  font-size: 14px;
   opacity: 0.7;
+  font-size: 12px;
+  letter-spacing: 2.5px;
 }
 .card img {
   position: absolute;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   object-fit: contain;
   z-index: 0;
 }
 .price {
   font-family: "Raleway", sans-serif;
   font-weight: 700;
+  font-size: 20px;
+}
+.price::before {
+  content: "$";
+  font-size: 0.7em;
+  margin-right: 2px;
+  color: #841eb4;
 }
 .card-row::-webkit-scrollbar {
   height: 20px;
@@ -475,7 +622,7 @@ header {
 .card-row::-webkit-scrollbar-thumb:hover {
   background: #351201;
 }
-.page-2-right .search-button-p2{
+.page-2-right .search-button-p2 {
   width: 44px;
   height: 44px;
   top: 42px;

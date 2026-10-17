@@ -19,29 +19,36 @@
 </head>
 
 <body>
-    <label for="menu-toggle" class="menu-overlay"></label>
+    <header>
+        <!-- nav logo -->
+        <div class="nav-logo-display">
+            <img class="nav-logo-img" src="logo.png">
+            <a>The<br>Codify Coffee</a>
+        </div>
+        <!-- nav links -->
+        <div class="nav-links">
+            <a href="#">Locations</a>
+            <a href="#">Menu</a>
+            <a href="#">Events</a>
+            <a href="#">About us</a>
+        </div>
+        <!-- nav links rigth buttons -->
+        <div class="nav-links-buttons">
+            <a href="#search-box" class="nav-links-search-button"></a>
+            <!-- the side nav button -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="nav-links-options-button"></label>
+        </div>
+        <!-- side bar -->
+        <label for="menu-toggle" class="menu-overlay"></label>
+        <nav class="side-menu">
+            <a href="#search-box">Locations</a>
+            <a href="#search-box">Menu</a>
+            <a href="#search-box">Events</a>
+            <a href="#search-box">About us</a>
+        </nav>
+    </header>
     <section class="hero">
-        <header>
-            <!-- nav logo -->
-            <div class="nav-logo-display">
-                <img class="nav-logo-img" src="logo.png">
-                <a>The<br>Codify Coffee</a>
-            </div>
-            <!-- nav links -->
-            <div class="nav-links">
-                <a>Locations</a>
-                <a>Menu</a>
-                <a>Events</a>
-                <a>About us</a>
-            </div>
-            <!-- nav links rigth buttons -->
-            <div class="nav-links-buttons">
-                <a href="#search-box" class="nav-links-search-button"></a>
-                <!-- the side nav button -->
-                <input type="checkbox" id="menu-toggle" class="menu-toggle">
-                <label for="menu-toggle" class="nav-links-options-button"></label>
-            </div>
-        </header>
         <div class="main-sc">
             <div class="glow"></div>
             <div class="black-hill"></div>
@@ -101,39 +108,39 @@
                 <img src="ice-coffee.png">
                 <h3>Ice Coffee</h3>
                 <p>Americano Coffee</p>
-                <span class="price">4.99$</span>
+                <span class="price">3.99</span>
             </div>
             <div class="card">
                 <img src="ice-latte.png">
                 <h3>Ice Latte</h3>
                 <p>Latte with Cold Milk</p>
-                <span class="price">5.99$</span>
+                <span class="price">4.99</span>
             </div>
             <div class="card">
                 <img src="strawberry.png">
-                <h3>Cappuccino</h3>
-                <p>Espresso with foamed milk</p>
-                <span class="price">5.99$</span>
+                <h3>Milk Shake</h3>
+                <p>Foamed Strawberry Milk Shake Frappe </p>
+                <span class="price">5.99</span>
             </div>
             <div class="card">
                 <img src="matcha.png">
-                <h3>Cappuccino</h3>
-                <p>Espresso with foamed milk</p>
-                <span class="price">5.99$</span>
+                <h3>Matcha</h3>
+                <p>Matcha With iced Milk</p>
+                <span class="price">6.99</span>
             </div>
             <div class="card">
                 <img src="mocha.png">
-                <h3>Cappuccino</h3>
-                <p>Espresso with foamed milk</p>
-                <span class="price">5.99$</span>
+                <h3>Mocha</h3>
+                <p>Choclate Mocha frappe</p>
+                <span class="price">5.49</span>
             </div>
             <div class="card">
                 <img src="sundee-frappe.png">
-                <h3>Cappuccino</h3>
-                <p>Espresso with foamed milk</p>
-                <span class="price">5.99$</span>
+                <h3>Frappe</h3>
+                <p>Caramel with iced Milk Frappe</p>
+                <span class="price">5.49</span>
             </div>
- 
+
         </div>
     </section>
 </body>
